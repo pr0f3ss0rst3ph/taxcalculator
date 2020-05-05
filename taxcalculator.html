@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Tax Calculator</title>
+        <link rel="stylesheet" href="calculator.css" type="text/css" />
+    </head>
+    <body>
+        <div class="inputbody">
+            <div class="row">
+                <div class="headingtext">Tax Calculator</div>
+            </div>
+            <div class="row">
+                <div class="col1">
+                    <label>Payment Type</label>
+                </div>
+                <div class="col2">
+                    <select id="paymenttype">
+                        <option value="Fortnightly">Fortnightly</option>
+                        <option value="Monthly">Monthly</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col1">
+                    <label>Gross Income ($)</label>
+                </div>
+                <div class="col2">
+                    <input type="number" id="grossincome" autocomplete="off" />
+                </div>
+            </div>
+            <div class="row">
+                <script src="taxcalculation.js"></script>
+                <button onclick="calculate();">Calculate</button>
+                
+            </div>
+        </div>
+        <!--? Display Box-->
+        <div class="results">
+            <div class="row-2">
+                <div class="col-1">Non-Taxable</div>
+                <div class="col-2">NIS</div>
+                <div class="col-3">Chargeable Income</div>
+                <div class="col-4">Tax Payable</div>
+                <div class="col-5">NET Income</div>
+            </div>
+            <br>
+            <div class="row-2">
+                <div class="col-1" id="nontax_r"></div>
+                <div class="col-2" id="nis_r"></div>
+                <div class="col-3" id="chargeableincome_r"></div>
+                <div class="col-4" id="taxpayable_r"></div>
+                <div class="col-5" id="netincome_r"></div>
+            </div>
+        </div>
+    </body>
+</html>
