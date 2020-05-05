@@ -6,13 +6,13 @@ function calculate(){
 
     var nisvalue = nis(paymenttype,grossincome);
     console.log(nisvalue);
-    var nontaxable = freepay(paymenttype,grossincome);
+    var nontaxable = freepay(grossincome);
     console.log(nontaxable);
-    var chargeableincome = chargeable(paymenttype, grossincome, nontaxable, nisvalue);
+    var chargeableincome = chargeable(grossincome, nontaxable, nisvalue);
     console.log(chargeableincome);
-    var tier1tax = tier1(paymenttype, chargeableincome);
+    var tier1tax = tier1(chargeableincome);
     console.log(tier1tax);
-    var tier2tax = tier2(paymenttype, chargeableincome);
+    var tier2tax = tier2(chargeableincome);
     console.log(tier2tax);
     var taxpayable = tier1tax + tier2tax;
     console.log(taxpayable);
@@ -33,24 +33,30 @@ function calculate(){
           var nisvalue = 0.056 * 280000;
         }
       }
+      else if (paymenttype == "Fortnightly") {
+          var initcalculation = 3360000/26;
+             if (grossincome < initcalculation) {
+               var nisvalue = 0.056 * grossincome;
+             } else {
+               var nisvalue = 0.056 * initcalculation;
+             }
+           }
 
       return nisvalue;
     }
 
-    function freepay(paymenttype, grossincome) {
-      if (paymenttype == "Monthly") {
+    function freepay(grossincome) {
         if (grossincome > 180000) {
           var nontaxable = grossincome / 3;
         } else {
           var nontaxable = 65000;
         }
-      }
 
       return nontaxable;
     }
 
-    function chargeable(paymenttype, grossincome, nontaxable, nisvalue) {
-      if (paymenttype == "Monthly") {
+    function chargeable(grossincome, nontaxable, nisvalue) {
+
         var initcalculation = grossincome - (nontaxable + nisvalue);
 
         if (initcalculation < 0) {
@@ -58,25 +64,22 @@ function calculate(){
         } else {
           var chargeableincome = initcalculation;
         }
-      }
-
+ 
       return chargeableincome;
     }
 
-    function tier1(paymenttype, chargeableincome) {
-      if (paymenttype == "Monthly") {
+    function tier1(chargeableincome) {
+
         if (chargeableincome < 120000) {
           var tier1tax = 0.28 * chargeableincome;
         } else {
           var tier1tax = 0.28 * 120000;
         }
-      }
 
       return tier1tax;
     }
 
-    function tier2(paymenttype, chargeableincome) {
-      if (paymenttype == "Monthly") {
+    function tier2(chargeableincome) {
         var initcalculation = chargeableincome - 120000;
 
         if (initcalculation > 0) {
@@ -84,7 +87,6 @@ function calculate(){
         } else {
           var tier2tax = 0;
         }
-      }
 
       return tier2tax;
     }
