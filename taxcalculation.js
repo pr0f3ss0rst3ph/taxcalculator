@@ -3,6 +3,8 @@ function calculate(){
     var paymenttype = document.getElementById("paymenttype").value;
     var grossincome = document.getElementById("grossincome").value;
     grossincome = Number(grossincome);
+    var resultsfield = document.getElementById('results');
+    resultsfield.style.display = "block";
 
     var nisvalue = nis(paymenttype,grossincome);
     console.log(nisvalue);
